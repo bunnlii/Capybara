@@ -15,7 +15,6 @@ public class CapybaraController {
     @Autowired
     private CapybaraService service;
 
-    //not finished
     @GetMapping("/all")
     public Object getAllCapybara(Model model){
         model.addAttribute("CapybaraList", service.getAllCapybara());
@@ -23,34 +22,50 @@ public class CapybaraController {
         return "capybara-list";
     }
 
-    //not finished
+
     @GetMapping("/{capybaraId}")
-    public Object getCapybara(@PathVariable int capybaraId) {
-
+    public Object getCapybara(@PathVariable int capybaraId, Model model) {
+        model.addAttribute("capybara", service.getCapybaraById(capybaraId));
+        model.addAttribute("title", "Capybara #: " + capybaraId);
+        return "capybara-details";
     }
-    //not finished
+
+
     @PostMapping("/new")
-    public Object addNewCapybara() {
+    public Object addNewCapybara(Capybara Capybara) {
+        service.addNewCapybara(Capybara);
+        return "redirect:/capybara/all";
     }
 
-    //not finished
+
     @PutMapping("/update/{capybaraId}")
-    public Object updateCapybara() {
+    public Object updateCapybara(@PathVariable int CapybaraId, Model model) {
+        model.addAttribute("capybara", service.getCapybaraById(CapybaraId));
+        model.addAttribute("title", "Update Capybara");
+        return "capybara-update";
     }
 
-    //not finished
+
     @DeleteMapping("/delete/{capybaraId}")
-    public Object deleteCapybaraById() {
+    public Object deleteCapybaraById(@PathVariable int CapybaraId) {
+        service.deleteById(CapybaraId);
+        return "redirect:/capybara/all";
     }
 
-    //not finished
+
     @GetMapping("/all/{age}")
-    public Object getCapybaraByAge() {
+    public Object getCapybaraByAge(@PathVariable int age, Model model) {
+        model.addAttribute("capybaraList", service.getCapybaraByAge(age));
+        model.addAttribute("title", "Capybara by Age: " + age);
+        return "capybara-list";
     }
 
-    //not finished
+
     @GetMapping("/name")
-    public Object getCapybaraByName() {
+    public Object getCapybaraByName(@RequestParam(name = "search", defaultValue = "") String search, Model model) {
+        model.addAttribute("capybaraList", service.getCapybaraByName(search));
+        model.addAttribute("title", "Capybara by Name: " + search);
+        return "capybara-list";
     }
 }
 
