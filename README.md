@@ -6,7 +6,7 @@ http://localhost:8080/capybara/all
 **view capybara by id: {id} = capybaraId**
 http://localhost:8080/capybara/{id}
 
-**create new capybara: example : {enter info} = **
+**create new capybara: example : {enter info}**
 {
     "name": "Jeffery",
     "description": "A fun capybara, who also likes strawberries.",
