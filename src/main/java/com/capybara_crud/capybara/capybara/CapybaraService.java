@@ -12,6 +12,7 @@ public class CapybaraService {
     private CapybaraRepository CapybaraRepository;
 
     public List<Capybara> getAllCapybara() {
+
         return CapybaraRepository.findAll();
     }
 
@@ -35,10 +36,18 @@ public class CapybaraService {
         CapybaraRepository.save(Capybara);
     }
 
-    public void updateCapybara(Capybara Capybara) {
+    public void UpdateCapybara(int CapybaraId, Capybara capybara) {
+        Capybara existing = getCapybaraById(CapybaraId);
+        existing.setName(capybara.getName());
+        existing.setDescription(capybara.getDescription());
+        existing.setAge(capybara.getAge());
 
-        CapybaraRepository.save(Capybara);
+        CapybaraRepository.save(existing);
     }
 
+    public void deleteById(int CapybaraId) {
+
+        CapybaraRepository.deleteById(CapybaraId);
+    }
 
 }
