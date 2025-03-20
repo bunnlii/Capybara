@@ -40,16 +40,17 @@ public class CapybaraController {
     // http://localhost:8080/capybara/update/{id}/ {enter info}
 
     @PutMapping("/update/{capybaraId}")
-    public Object updateCapybara(@PathVariable int CapybaraId, @RequestBody Capybara capybara) {
-        service.updateCapybara(CapybaraId, capybara);
-        return new ResponseEntity<>(service.getCapybaraById(CapybaraId), HttpStatus.CREATED);
+    public Object updateCapybara(@PathVariable int capybaraId, @RequestBody Capybara capybara) {
+        service.updateCapybara(capybaraId, capybara);
+        return new ResponseEntity<>(service.getCapybaraById(capybaraId), HttpStatus.OK);
     }
+
 
     // http://localhost:8080/capybara/delete/{id}
 
     @DeleteMapping("/delete/{capybaraId}")
-    public Object deleteCapybaraById(@PathVariable int CapybaraId) {
-        service.deleteById(CapybaraId);
+    public Object deleteCapybaraById(@PathVariable int capybaraId) {
+        service.deleteById(capybaraId);
         return new ResponseEntity<>(service.getAllCapybara(), HttpStatus.OK);
     }
 
