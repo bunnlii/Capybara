@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class CapybaraService {
 
@@ -36,7 +37,7 @@ public class CapybaraService {
         CapybaraRepository.save(Capybara);
     }
 
-    public void UpdateCapybara(int CapybaraId, Capybara capybara) {
+    public void updateCapybara(int CapybaraId, Capybara capybara) {
         Capybara existing = getCapybaraById(CapybaraId);
         existing.setName(capybara.getName());
         existing.setDescription(capybara.getDescription());
@@ -46,7 +47,6 @@ public class CapybaraService {
     }
 
     public void deleteById(int CapybaraId) {
-
         CapybaraRepository.deleteById(CapybaraId);
     }
 

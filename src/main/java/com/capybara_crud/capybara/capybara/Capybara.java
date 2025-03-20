@@ -7,11 +7,16 @@ import jakarta.persistence.*;
 
 public class Capybara {
 
-    public String name;
+    @Column(nullable = false)
+    private String name;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int capybaraId;
+
     public String description;
+
+    @Column(nullable = false)
     public int age;
 
     public Capybara(String name, int capybaraId, String description, int age) {

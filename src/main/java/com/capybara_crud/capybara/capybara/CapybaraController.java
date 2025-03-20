@@ -15,57 +15,56 @@ public class CapybaraController {
     @Autowired
     private CapybaraService service;
 
+    // http://localhost:8080/capybara/all
+
     @GetMapping("/all")
-    public Object getAllCapybara(Model model){
-        model.addAttribute("CapybaraList", service.getAllCapybara());
-        model.addAttribute("title", "All Capybara");
-        return "capybara-list";
+    public Object getAllCapybara(){
+        return new ResponseEntity<>(service.getAllCapybara(), HttpStatus.OK);
     }
 
+    // http://localhost:8080/capybara/{id}
 
     @GetMapping("/{capybaraId}")
-    public Object getCapybara(@PathVariable int capybaraId, Model model) {
-        model.addAttribute("capybara", service.getCapybaraById(capybaraId));
-        model.addAttribute("title", "Capybara #: " + capybaraId);
-        return "capybara-details";
+    public Object getCapybara(@PathVariable int capybaraId) {
+        return new ResponseEntity<>(service.getCapybaraById(capybaraId), HttpStatus.OK);
     }
 
+    // http://localhost:8080/capybara/new {enter info}
 
     @PostMapping("/new")
-    public Object addNewCapybara(Capybara Capybara) {
+    public Object addNewCapybara(@RequestBody Capybara Capybara) {
         service.addNewCapybara(Capybara);
-        return "redirect:/capybara/all";
+        return new ResponseEntity<>(service.getAllCapybara(), HttpStatus.CREATED);
     }
 
+    // http://localhost:8080/capybara/update/{id}/ {enter info}
 
     @PutMapping("/update/{capybaraId}")
-    public Object updateCapybara(@PathVariable int CapybaraId, Model model) {
-        model.addAttribute("capybara", service.getCapybaraById(CapybaraId));
-        model.addAttribute("title", "Update Capybara");
-        return "capybara-update";
+    public Object updateCapybara(@PathVariable int CapybaraId, @RequestBody Capybara capybara) {
+        service.updateCapybara(CapybaraId, capybara);
+        return new ResponseEntity<>(service.getCapybaraById(CapybaraId), HttpStatus.CREATED);
     }
 
+    // http://localhost:8080/capybara/delete/{id}
 
     @DeleteMapping("/delete/{capybaraId}")
     public Object deleteCapybaraById(@PathVariable int CapybaraId) {
         service.deleteById(CapybaraId);
-        return "redirect:/capybara/all";
+        return new ResponseEntity<>(service.getAllCapybara(), HttpStatus.OK);
     }
 
+    // http://localhost:8080/capybara/{enter age}
 
     @GetMapping("/all/{age}")
-    public Object getCapybaraByAge(@PathVariable int age, Model model) {
-        model.addAttribute("capybaraList", service.getCapybaraByAge(age));
-        model.addAttribute("title", "Capybara by Age: " + age);
-        return "capybara-list";
+    public Object getCapybaraByAge(@PathVariable int age) {
+        return new ResponseEntity<>(service.getCapybaraByAge(age), HttpStatus.OK);
     }
 
+    // http://localhost:8080/capybara/name?search={enter name}
 
     @GetMapping("/name")
     public Object getCapybaraByName(@RequestParam(name = "search", defaultValue = "") String search, Model model) {
-        model.addAttribute("capybaraList", service.getCapybaraByName(search));
-        model.addAttribute("title", "Capybara by Name: " + search);
-        return "capybara-list";
+        return new ResponseEntity<>(service.getCapybaraByName(search), HttpStatus.OK);
     }
 }
 

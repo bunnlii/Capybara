@@ -15,3 +15,4 @@ public interface CapybaraRepository extends JpaRepository<Capybara, Integer> {
     List<Capybara> getCapybaraByName(String name);
 
 }
+
