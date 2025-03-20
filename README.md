@@ -1,4 +1,4 @@
-#**API Endpoints:**
+#API Endpoints:
 
 #**view all capybaras:**
 >http://localhost:8080/capybara/all
